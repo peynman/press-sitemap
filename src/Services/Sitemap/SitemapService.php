@@ -95,11 +95,13 @@ class SitemapService implements ISitemapService
         $root->encoding = 'UTF-8';
         $root->formatOutput = true;
         $sitemapindex = $root->createElementNS('http://www.sitemaps.org/schemas/sitemap/0.9', 'urlset');
+        $sitemapindex->setAttribute('xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
+        $sitemapindex->setAttribute('xmlns:video', 'http://www.google.com/schemas/sitemap-video/1.1');
         /** @var SitemapEntry $entry */
         foreach ($urlsets as $entry) {
             $sitemapindex->appendChild($root->importNode($entry->getNode(), true));
         }
         $root->appendChild($sitemapindex);
-        $this->writeXmlToFile($root->saveXML(), $collection->getUrlSetName().'.xml');
+        $this->writeXmlToFile($root->saveXML(), $collection->getUrlSetName() . '.xml');
     }
 }

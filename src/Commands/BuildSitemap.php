@@ -5,14 +5,14 @@ namespace Larapress\Sitemap\Commands;
 use Illuminate\Console\Command;
 use Larapress\Sitemap\Services\Sitemap\ISitemapService;
 
-class ResetSitemapCache extends Command
+class BuildSitemap extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'lp:sitemap:reset {dest?}';
+    protected $signature = 'lp:sitemap:build';
 
     /**
      * The console command description.
@@ -41,6 +41,7 @@ class ResetSitemapCache extends Command
         /** @var ISitemapService */
         $service = app(ISitemapService::class);
         $service->generateSitemap();
+        $this->info('Sitemap updated.');
 
         return 0;
     }
